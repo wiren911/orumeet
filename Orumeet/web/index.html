@@ -31,6 +31,17 @@ and open the template in the editor.
         </section>
         
         <section id="utbildning">
+            <form method="post" action="insertServlet">
+                FirstName: <input type="text" name="txtname" /><br><br>
+                LastName : <input type="text" name="txtlast" /><br><br>
+                Email    : <input type="text" name="txtemail" /><br><br>
+                Phone    : <input type="text" name="txtphone" /><br><br>
+                
+                <input type="submit" value="Add Data" />
+                <input type="reset" value="Clear" />
+            </form>
+            
+            
             <div>
                 Här hittar ni information angående våra kurser och kommande <br />
                 inforamtion nya och gammla kurser.
