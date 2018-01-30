@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2018-jan-22, 20:41:42
+    Author     : user
+*/
+html, body{
+    background-color: lightgrey;
+
+    overflow-x: hidden;
+}
+body{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+section{
+    min-height: 100vh;
+}
+#header, #utbildning, #forskning, #blogg{
+    padding-top: 5em;
+}
+#menu{
+    position: fixed;
+    width: 100%;
+    background-color: #333;
+}
+#menu ul{
+    list-style-type: none;
+    float: right;
+}
+ul.right{
+    float: left;
+}
+#menu li{
+    float: left;
+    width: 25%;
+}
+#menu li a{
+    color: white;
+    padding: 0.5em;
+    padding: 13px 15px;
+    text-decoration: none;
+}

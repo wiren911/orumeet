@@ -4,9 +4,17 @@
         <servlet-name>insertServlet</servlet-name>
         <servlet-class>insertServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>insertBlogg</servlet-name>
+        <servlet-class>insertBlogg</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>insertServlet</servlet-name>
         <url-pattern>/insertServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertBlogg</servlet-name>
+        <url-pattern>/insertBlogg</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
