@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
  
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -54,10 +55,20 @@ public class getServlet extends HttpServlet {
                 stmt = conn.createStatement();
                 String query = "select * from mote where datum ='"+datum+"'";
                 ResultSet rs = stmt.executeQuery(query);
+                out.println("<h1> Här presenteras alla möten under valt datum</h1>");
+               out.println("<button onclick=goBack()>Go Back");
+               out.println("</button>");
+               out.println("<script>");
+               out.println("function goBack() {");
+               out.println("window.history.back()");
+               out.println("}");
+               out.println("</script>");
                
                 while (rs.next()) {
                 String titel = rs.getString("title");
                 String plats = rs.getString("plats");
+                String tid = rs.getString("tid");
+                String ettDatum = rs.getString("datum");
                
                
             out.println("<!DOCTYPE html>");
@@ -66,12 +77,15 @@ public class getServlet extends HttpServlet {
             out.println("<title>Info om möte</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Mötet har titeln: "+titel+", och platsen för mötet är: "+plats+"!</h1>");
+           
+            
+            out.println("<h1>Datum: "+ettDatum+" Tid: "+tid+" <br>Titel: "+titel+" Plats: "+plats+"!</h1>");
+            
             out.println("</body>");
             out.println("</html>");
-                }
-                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-            rd.include(request, response);
+                }//response.sendRedirect("index.html");
+                //RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                //rd.include(request, response);
         } catch (Exception e){
                 e.printStackTrace();
             }
@@ -104,6 +118,7 @@ public class getServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

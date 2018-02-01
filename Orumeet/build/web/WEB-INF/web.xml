@@ -4,6 +4,10 @@
         <servlet-name>insertServlet</servlet-name>
         <servlet-class>insertServlet</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>getServlet</servlet-name>
+        <servlet-class>getServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>insertBlogg</servlet-name>
         <servlet-class>insertBlogg</servlet-class>
@@ -11,6 +15,10 @@
     <servlet-mapping>
         <servlet-name>insertServlet</servlet-name>
         <url-pattern>/insertServlet</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>getServlet</servlet-name>
+        <url-pattern>/getServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>insertBlogg</servlet-name>
