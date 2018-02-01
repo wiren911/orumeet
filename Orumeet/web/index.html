@@ -4,7 +4,6 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
 <html>
     <head>
         <link href="stylesheet/style.css" rel="stylesheet" type="text/css"/>
@@ -19,30 +18,31 @@ and open the template in the editor.
                 <li><a href="#utbildning">Utbildning</a></li>
                 <li><a href="#forskning">Forskning</a></li>
                 <li><a href="#blogg">Blogg</a></li>
+                <li><a href="#mote">Möte</a></li>
                 <li><a href="index.jsp">Send</a></li>
                 <!--<li><a href="secureUser/pageU.html">Login</a></li>-->
             </ul>
         </nav>
-        
+       
         <section id="header">
             <div>
                 Välkommen till Örebro Universitets informatik sida för lärare och annan personal.
             </div>
-
+ 
         </section>
-        
+       
         <section id="utbildning">
             <form method="post" action="insertServlet">
                 FirstName: <input type="text" name="txtname" /><br><br>
                 LastName : <input type="text" name="txtlast" /><br><br>
                 Email    : <input type="text" name="txtemail" /><br><br>
                 Phone    : <input type="text" name="txtphone" /><br><br>
-                
+               
                 <input type="submit" value="Add Data" />
                 <input type="reset" value="Clear" />
             </form>
-            
-            
+           
+           
             <div>
                 Här hittar ni information angående våra kurser och kommande <br />
                 inforamtion nya och gammla kurser.
@@ -54,13 +54,24 @@ and open the template in the editor.
                 om forskning samt våra forskningsutbildningar.
             </div>
         </section>
-        <section id="Blogg">
-            <form id="myForm" action="insertBlogg" method="post">
-                Description: <textarea name="txtdescription"></textarea><br><br>
-                
-                <input type="submit" value="Post"/>
-                <input type="reset" value="Clear" />
-            </form>
+        <section id="mote">
+            <form  target= "_self" method="get" action="getServlet">
+            <div>
+                  <div>
+                      <label for="mote"><b>För att se information om vilka möten som finns<br /></b></label>
+                <label for="valjDatum">Börja med att välja ett datum:</label>
+                <input type="date" id="valjDatum" name="valjDatum" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                 <span class="validity"></span>
+                </div>
+                <div>
+                    <input type="Submit" value="kolla mote"/>
+                    <textarea rows="4" cols="50">
+                   
+                    </textarea>
+                 </div>
+            </div>
+        </section>
+        <section id="blogg">
             <div>
                 Här presenteras lite mer sekretesbelagd information.
             </div>
