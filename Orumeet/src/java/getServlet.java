@@ -9,16 +9,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
  
 /**
  *
@@ -29,6 +30,10 @@ public class getServlet extends HttpServlet {
  
     Connection conn;
     Statement stmt;
+    Statement stm;
+    Statement st;
+    Statement s;
+    //PreparedStatement pstmt;
     String datum;
  
     String dburl = "jdbc:mysql://localhost:3306/oru?zeroDateTimeBehavior=convertToNull";
@@ -53,40 +58,68 @@ public class getServlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(dburl, Username, PassWord);
                 stmt = conn.createStatement();
-                String query = "select * from mote where datum ='"+datum+"'";
-                ResultSet rs = stmt.executeQuery(query);
+                stm = conn.createStatement();
+                st = conn.createStatement();
+                s = conn.createStatement();
+             
+               String query = "select * from mote where datum ='"+datum+"'order by tid";
+               String newquery = "select * from mote where datum ='"+datum+"'";
+               ResultSet rs = stmt.executeQuery(query);
+               ResultSet r = s.executeQuery(newquery);
+                if(r.first() == false){
+                    out.println("<h2> Det finns inga möten under detta datum!</h2>");
+                    r.close();
+                }else{
                 out.println("<h1> Här presenteras alla möten under valt datum</h1>");
-               out.println("<button onclick=goBack()>Go Back");
+                }
+               out.println("<button onclick=goBack()>Gå Tillbaka");
                out.println("</button>");
                out.println("<script>");
                out.println("function goBack() {");
                out.println("window.history.back()");
                out.println("}");
                out.println("</script>");
-               
-                while (rs.next()) {
+                
+                while ( rs.next()) {
                 String titel = rs.getString("title");
                 String plats = rs.getString("plats");
                 String tid = rs.getString("tid");
                 String ettDatum = rs.getString("datum");
-               
-               
+                String id = rs.getString("id");
+                
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Info om möte</title>");            
             out.println("</head>");
             out.println("<body>");
-           
-            
-            out.println("<h1>Datum: "+ettDatum+" Tid: "+tid+" <br>Titel: "+titel+" Plats: "+plats+"!</h1>");
-            
+            out.println("<h2>Datum: <Small>"+ettDatum+"</Small> Tid: <Small>"+tid+"</Small> <br>Titel: <Small>"+titel+"</Small> Plats: <Small>"+plats+"!</Small></h2>");
+  
+                String aquery = "select * from larare join larare_mote on larare.id = larare join mote on mote.id = mote where mote.id ='"+id+"'";
+                ResultSet rss = stm.executeQuery(aquery);
+                ResultSet rt = st.executeQuery(aquery);
+                if(rt.first() == false){
+                        out.println("<p style=\"color:red;\"> Inga personer är uppskrivna på mötet.</p>");
+                    }
+                else{
+                    out.println("<h3 style=\"color:grey;\">Personer som medverkar under detta möte är:</h3>");
+                }
+                while (rss.next()){
+                    
+                String fornamn = rss.getString("firstname");
+                String efternamn = rss.getString("lastname"); 
+            out.println("<ul style=\"color:red;\"><li>"+fornamn+" "+efternamn+"</li></ul>");
+                }
             out.println("</body>");
             out.println("</html>");
-                }//response.sendRedirect("index.html");
-                //RequestDispatcher rd = request.getRequestDispatcher("index.html");
-                //rd.include(request, response);
-        } catch (Exception e){
+            
+//            rss.close();
+                //response.sendRedirect("index.html");
+//                RequestDispatcher rd = request.getRequestDispatcher("index.html");
+//                rd.include(request, response);
+             
+               
+                }} catch (Exception e){
                 e.printStackTrace();
             }
     }
